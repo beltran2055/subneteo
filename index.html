@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subneteo - Práctica 4</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    nav {
+      background: #444;
+      display: flex;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      padding: 1rem;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav a:hover {
+      background: #666;
+      color: #00ffff; /* Azul agua */
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); /* Sombra roja */
+    }
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+    section {
+      flex: 3;
+      padding: 1rem;
+    }
+    aside {
+      flex: 1;
+      background: #e4e4e4;
+      padding: 1rem;
+      margin-left: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    article {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: transform 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    article:hover {
+      transform: scale(1.02);
+    }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      max-width: 300px;
+      display: block;
+      margin: auto;
+    }
+    .etiquetas {
+      background: #fff8dc;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .etiquetas h2 {
+      color: #333;
+    }
+    .etiquetas ul {
+      list-style: square;
+      padding-left: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Subneteo de Redes</h1>
+  </header>
+
+  <nav>
+    <a href="#que-es">¿Qué es?</a>
+    <a href="#pasos">Pasos</a>
+    <a href="#subred">Subred de una IP</a>
+    <a href="#host-ip">IP de un Host</a>
+    <a href="#etiquetas">Etiquetas HTML</a>
+  </nav>
+
+  <main>
+    <section>
+      <article id="que-es">
+        <h2>¿Qué es el subneteo?</h2>
+        <p>El subneteo es el proceso de dividir una red IP en subredes más pequeñas, para mejorar la organización, seguridad y uso eficiente del espacio de direcciones IP.</p>
+        <img src="sub.jpg" alt="Ejemplo de Subneteo">
+      </article>
+
+      <article id="pasos">
+        <h2>Pasos para realizar el subneteo</h2>
+        <ol>
+          <li>Determinar la cantidad de subredes o hosts requeridos.</li>
+          <li>Calcular cuántos bits se necesitan para las subredes.</li>
+          <li>Determinar la nueva máscara de subred.</li>
+          <li>Calcular los rangos de IP válidas por subred.</li>
+          <li>Asignar IPs a los dispositivos.</li>
+        </ol>
+        <table>
+          <thead>
+            <tr>
+              <th>Máscara</th>
+              <th># Subredes</th>
+              <th>Hosts/Subred</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>/24</td>
+              <td>1</td>
+              <td>254</td>
+            </tr>
+            <tr>
+              <td>/26</td>
+              <td>4</td>
+              <td>62</td>
+            </tr>
+            <tr>
+              <td>/30</td>
+              <td>64</td>
+              <td>2</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article id="subred">
+        <h2>¿A qué subred pertenece una dirección IP?</h2>
+        <p>Para saber a qué subred pertenece una IP, se aplica la máscara de subred mediante una operación AND:</p>
+        <ul>
+          <li><strong>IP:</strong> 192.168.1.130</li>
+          <li><strong>Máscara:</strong> 255.255.255.192 (/26)</li>
+          <li><strong>Resultado:</strong> IP pertenece a la subred <strong>192.168.1.128/26</strong></li>
+        </ul>
+      </article>
+
+      <article id="host-ip">
+        <h2>¿Qué dirección IP le corresponde a un número de host?</h2>
+        <p>Para saber qué IP corresponde al host #X dentro de una subred:</p>
+        <ul>
+          <li>Subred: 192.168.1.0/28</li>
+          <li>Host #5</li>
+          <li>Rango válido: 192.168.1.1 a 192.168.1.14</li>
+          <li>IP del host #5: <strong>192.168.1.5</strong></li>
+        </ul>
+      </article>
+
+      <article class="etiquetas" id="etiquetas">
+        <h2>¿Para qué sirve cada etiqueta semántica?</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Etiqueta</th>
+              <th>¿Para qué sirve?</th>
+              <th>¿Cómo funciona?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&lt;header&gt;</td>
+              <td>Encabezado de la página</td>
+              <td>Incluye títulos o logotipos; va al inicio del sitio.</td>
+            </tr>
+            <tr>
+              <td>&lt;nav&gt;</td>
+              <td>Menú de navegación</td>
+              <td>Contiene los enlaces principales del sitio web.</td>
+            </tr>
+            <tr>
+              <td>&lt;main&gt;</td>
+              <td>Contenido principal</td>
+              <td>Envuelve el contenido específico de esa página.</td>
+            </tr>
+            <tr>
+              <td>&lt;section&gt;</td>
+              <td>Secciones temáticas</td>
+              <td>Agrupa contenido relacionado dentro del main.</td>
+            </tr>
+            <tr>
+              <td>&lt;article&gt;</td>
+              <td>Contenido independiente</td>
+              <td>Cada artículo puede leerse de forma aislada.</td>
+            </tr>
+            <tr>
+              <td>&lt;aside&gt;</td>
+              <td>Contenido complementario</td>
+              <td>Sirve para tips, anuncios o referencias externas.</td>
+            </tr>
+            <tr>
+              <td>&lt;footer&gt;</td>
+              <td>Pie de página</td>
+              <td>Incluye créditos, enlaces o contactos al final.</td>
+            </tr>
+          </tbody>
+        </table>
+        <img src="inter.png" alt="Ejemplo visual de subneteo" style="margin-top: 1rem; border-radius: 8px;" />
+      </article>
+    </section>
+
+    <aside>
+      <h3>Tips de subneteo</h3>
+      <ul>
+        <li>Siempre calcula los bits necesarios.</li>
+        <li>Recuerda que los rangos empiezan después del ID de subred.</li>
+        <li>La última IP es la de broadcast.</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Subneteo Web - Práctica 5</p>
+  </footer>
+
+</body>
+</html>
