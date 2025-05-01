@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subneteo de Redes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      background-color: #ffffff;
+      color: #002b5c;
+    }
+    header {
+      background: #0077cc;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    nav {
+      background: #005fa3;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background-color: #3399ff;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav a:hover {
+      background-color: #cceeff;
+      color: #004488;
+    }
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+    section {
+      flex: 3;
+      padding: 1rem;
+    }
+    aside {
+      flex: 1;
+      background: #e6f2ff;
+      padding: 1rem;
+      margin-left: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    article {
+      background: #f0f8ff;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #004488;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background-color: #ffffff;
+    }
+    th, td {
+      padding: 0.5rem;
+      border: 1px solid #99ccff;
+      text-align: center;
+    }
+    th {
+      background-color: #cce6ff;
+    }
+    img {
+      width: 100%;
+      max-width: 300px;
+      display: block;
+      margin: 1rem auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Subneteo de Redes</h1>
+    <p>Aprende qué es el subneteo, cómo aplicarlo y sus ventajas.</p>
+    <nav>
+      <a href="#que-es">¿Qué es?</a>
+      <a href="#pasos">Pasos</a>
+      <a href="#ejemplo">Ejemplo</a>
+      <a href="#operacion">Operación AND</a>
+      <a href="#uso">Usos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+
+      <article id="que-es">
+        <h2>¿Qué es el Subneteo?</h2>
+        <p>El subneteo es el proceso de dividir una red IP en subredes más pequeñas. Esto mejora la administración, seguridad y eficiencia, y permite segmentar redes grandes en partes manejables.</p>
+      </article>
+
+      <article id="pasos">
+        <h2>Pasos para realizar el Subneteo</h2>
+        <ol>
+          <li>Determinar la cantidad de subredes o hosts necesarios.</li>
+          <li>Calcular los bits necesarios para las subredes.</li>
+          <li>Aplicar la nueva máscara de subred.</li>
+          <li>Determinar los rangos válidos de IP para cada subred.</li>
+        </ol>
+        <table>
+          <thead>
+            <tr><th>Máscara</th><th># Subredes</th><th>Hosts/Subred</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>/24</td><td>1</td><td>254</td></tr>
+            <tr><td>/26</td><td>4</td><td>62</td></tr>
+            <tr><td>/30</td><td>64</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article id="ejemplo">
+        <h2>Ejemplo de Subneteo</h2>
+        <p><strong>Red:</strong> 192.168.1.0/24</p>
+        <p><strong>Queremos 4 subredes:</strong></p>
+        <ul>
+          <li>Subred 1: 192.168.1.0/26</li>
+          <li>Subred 2: 192.168.1.64/26</li>
+          <li>Subred 3: 192.168.1.128/26</li>
+          <li>Subred 4: 192.168.1.192/26</li>
+        </ul>
+      </article>
+
+      <article id="operacion">
+        <h2>¿A qué subred pertenece una IP?</h2>
+        <p>Para saber a qué subred pertenece una IP, se realiza una operación <strong>AND</strong> entre la IP y la máscara.</p>
+        <p><strong>Ejemplo:</strong></p>
+        <ul>
+          <li>IP: 192.168.1.130 → 11000000.10101000.00000001.10000010</li>
+          <li>Máscara: 255.255.255.192 → 11111111.11111111.11111111.11000000</li>
+          <li>Resultado (AND): 192.168.1.128</li>
+        </ul>
+        <table>
+          <thead>
+            <tr><th>IP</th><th>Máscara</th><th>Subred</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>192.168.1.130</td><td>255.255.255.192</td><td>192.168.1.128</td></tr>
+            <tr><td>10.0.5.25</td><td>255.255.255.0</td><td>10.0.5.0</td></tr>
+            <tr><td>172.16.100.200</td><td>255.255.255.128</td><td>172.16.100.128</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article id="uso">
+        <h2>Uso del Subneteo</h2>
+        <p>El subneteo permite una mejor administración, control del tráfico y seguridad. Por ejemplo, una empresa puede dividir su red en subredes por departamentos (ventas, RH, finanzas).</p>
+        <img src="lt.png" alt="Ejemplo de uso del subneteo">
+        <h3>Ventajas:</h3>
+        <ul>
+          <li>Reducción del tráfico de broadcast</li>
+          <li>Mejor seguridad y segmentación</li>
+          <li>Facilidad para identificar fallos</li>
+        </ul>
+        <h3>Desventajas:</h3>
+        <ul>
+          <li>Complejidad en la configuración</li>
+          <li>Desperdicio de direcciones IP en enlaces pequeños</li>
+        </ul>
+      </article>
+
+    </section>
+
+    <aside>
+      <h3>Tips útiles</h3>
+      <ul>
+        <li>Identifica la IP de red y la de broadcast.</li>
+        <li>El rango válido está entre esas dos.</li>
+        <li>Los bits de host deben cubrir tus necesidades.</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Subneteo Web | Práctica de Redes</p>
+  </footer>
+
+</body>
+</html>
